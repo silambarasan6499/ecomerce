@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   ActivityIndicator,
@@ -7,9 +7,10 @@ import {
   Image,
   StyleSheet,
   FlatList,
-} from 'react-native';
-import { useTheme } from '../../hooks';
-import { useLazyFetchOneQuery } from '../../services/modules/users';
+  Alert,
+} from "react-native";
+import { useTheme } from "../../hooks";
+import { useLazyFetchOneQuery } from "../../services/modules/users";
 
 const ProductListScreen = ({ navigation }: any) => {
   const { Layout, Images, darkMode: isDark } = useTheme();
@@ -20,17 +21,19 @@ const ProductListScreen = ({ navigation }: any) => {
     useLazyFetchOneQuery();
 
   useEffect(() => {
+    console.log("---", data);
+
     if (data && data.products) {
       setProductList(data.products);
     }
   }, [isSuccess, data]);
 
   useEffect(() => {
-    fetchOne('products');
+    fetchOne("products");
   }, []);
 
   const onSelectItem = (item: any) => {
-    navigation.navigate('ProductDetailScreen', { id: item.id });
+    navigation.navigate("ProductDetailScreen", { id: item.id });
   };
 
   const renderItem = (item: any) => {
@@ -78,15 +81,15 @@ const ProductListScreen = ({ navigation }: any) => {
             data={productList}
             numColumns={2}
             renderItem={({ item }) => renderItem(item)}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
           />
         )}
       </View>
-      {isLoading && (
+      {/* {isLoading && (
         <View style={[Layout.fill, Layout.colCenter]}>
           <ActivityIndicator size={'large'} />
         </View>
-      )}
+      )} */}
     </View>
   );
 };
@@ -106,12 +109,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
     padding: 10,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: "#f9c2ff",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -120,29 +123,29 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   searchView: {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    flexDirection: "row",
     marginTop: 20,
-    marginRight: '7%',
+    marginRight: "7%",
   },
   lineView: {
     height: 25,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   line: {
     height: 1.5,
-    backgroundColor: '#000000',
-    width: '80%',
-    marginLeft: '10%',
+    backgroundColor: "#000000",
+    width: "80%",
+    marginLeft: "10%",
   },
   text: {
     fontSize: 15,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   textView: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginTop: 10,
   },
   productListView: {
@@ -150,15 +153,15 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   listView: {
-    width: '100%',
-    height: '70%',
+    width: "100%",
+    height: "70%",
     marginRight: 15,
-    resizeMode: 'center',
+    resizeMode: "center",
   },
   imageView: {
-    alignItems: 'center',
-    backgroundColor: '#E0DFDF',
-    justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "#E0DFDF",
+    justifyContent: "center",
   },
   theem: {
     height: 150,

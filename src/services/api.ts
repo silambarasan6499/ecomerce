@@ -8,7 +8,7 @@ import {
 import { log } from 'console';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.API_URL,
+  baseUrl: "https://dummyjson.com/",
 });
 
 const baseQueryWithInterceptor: BaseQueryFn<
