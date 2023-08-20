@@ -1,4 +1,7 @@
 {
-  "helloUser": "Hi, my name is {{name}}"
+  "helloUser": "Hi, my name is {{name}}",
+  "firstName":"FirstName",
+  "register":"Register"
+
 }
 

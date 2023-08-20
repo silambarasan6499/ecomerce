@@ -1,11 +1,10 @@
-import React from 'react';
-import { SafeAreaView } from 'react-native';
+import React from "react";
+import { SafeAreaView } from "react-native";
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { ProductDetailScreen, ProductListScreen } from '../screens';
+import { createStackNavigator } from "@react-navigation/stack";
+import { ProductDetailScreen, ProductListScreen } from "../screens";
 
 const Stack = createStackNavigator();
-import { NavigationContainer } from '@react-navigation/native';
 
 const Navigator = () => {
   return (

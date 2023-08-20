@@ -44,6 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("/Users/mac-obs-39/silambarasan/test/ecomerce/android/app/.cxx/Debug/2i1462o1/armeabi-v7a/rnasyncstorage_autolinked_build/cmake_install.cmake")
   include("/Users/mac-obs-39/silambarasan/test/ecomerce/android/app/.cxx/Debug/2i1462o1/armeabi-v7a/rngesturehandler_codegen_autolinked_build/cmake_install.cmake")
   include("/Users/mac-obs-39/silambarasan/test/ecomerce/android/app/.cxx/Debug/2i1462o1/armeabi-v7a/reactnativemmkv_autolinked_build/cmake_install.cmake")
   include("/Users/mac-obs-39/silambarasan/test/ecomerce/android/app/.cxx/Debug/2i1462o1/armeabi-v7a/safeareacontext_autolinked_build/cmake_install.cmake")

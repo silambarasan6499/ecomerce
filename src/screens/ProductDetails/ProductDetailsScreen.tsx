@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   ActivityIndicator,
@@ -8,21 +8,28 @@ import {
   Image,
   StyleSheet,
   FlatList,
-} from 'react-native';
+  Alert,
+} from "react-native";
 
-import { useTheme } from '../../hooks';
-import { useLazyGetProductDetailsQuery } from '../../services/modules/users';
+import { useTheme } from "../../hooks";
+import { useLazyGetProductDetailsQuery } from "../../services/modules/users";
+import {
+  storeData,
+  getData,
+  storeValue,
+  getValue,
+} from "../../utills/asyncStorage";
 
-const ProductDetailScreen = (navigation: any) => {
+const ProductDetailScreen = ({ navigation, route }: any) => {
   const { Layout, Gutters, Images, darkMode: isDark } = useTheme();
   const [productDetail, setProductDetail] = useState<any>();
-  const [selectImage, setSelectImage] = useState('');
+  const [selectImage, setSelectImage] = useState("");
 
   const [getProductDetails, { data, isSuccess, isLoading, isFetching }] =
     useLazyGetProductDetailsQuery();
 
   useEffect(() => {
-    getProductDetails(`products/${navigation.route.params.id}`);
+    getProductDetails(`products/${route.params.id}`);
   }, []);
 
   useEffect(() => {
@@ -46,14 +53,19 @@ const ProductDetailScreen = (navigation: any) => {
     );
   };
 
+  const addCart = async (item: any) => {
+    await storeData("cartData", [productDetail]);
+    Alert.alert("Item added in cart")
+  };
+
   return (
-    <ScrollView
-      style={Layout.fill}
-      contentContainerStyle={[Layout.fullSize, Layout.fill]}
-    >
+    <ScrollView>
       {!isLoading && (
         <View>
-          <TouchableOpacity style={styles.imagetopStyle}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.imagetopStyle}
+          >
             <Image style={styles.tinyLogo} source={Images.home.back} />
           </TouchableOpacity>
           <View style={styles.lineView}>
@@ -64,8 +76,8 @@ const ProductDetailScreen = (navigation: any) => {
               <Text style={styles.brandText}>{productDetail?.brand}</Text>
             </View>
             <View>
-              <Text>{'$' + productDetail?.price}</Text>
-              <Text>{'$' + productDetail?.price}</Text>
+              <Text>{"$" + productDetail?.price}</Text>
+              <Text>{"$" + productDetail?.price}</Text>
             </View>
           </View>
 
@@ -79,11 +91,21 @@ const ProductDetailScreen = (navigation: any) => {
               />
             </View>
           </View>
+          <TouchableOpacity
+            onPress={() => addCart(productDetail)}
+            style={{
+              alignItems: "flex-end",
+              marginRight: 20,
+              justifyContent: "flex-end",
+            }}
+          >
+            <Text>Add cart</Text>
+          </TouchableOpacity>
           <View style={styles.imageStyle}>
             <FlatList
               data={productDetail?.images}
               renderItem={({ item }) => renderItem(item)}
-              keyExtractor={item => item.id}
+              keyExtractor={(item) => item.id}
               horizontal={true}
             />
           </View>
@@ -102,7 +124,7 @@ const ProductDetailScreen = (navigation: any) => {
 
       {isLoading && (
         <View style={[Layout.fill, Layout.colCenter]}>
-          <ActivityIndicator size={'large'} />
+          <ActivityIndicator size={"large"} />
         </View>
       )}
     </ScrollView>
@@ -115,8 +137,8 @@ const styles = StyleSheet.create({
   },
   line: {
     height: 1.5,
-    backgroundColor: '#000000',
-    width: '100%',
+    backgroundColor: "#000000",
+    width: "100%",
   },
   tinyLogo: {
     width: 15,
@@ -126,7 +148,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 10,
     fontSize: 12,
-    fontWeight: '300',
+    fontWeight: "300",
   },
   destitle: {
     marginLeft: 20,
@@ -138,19 +160,19 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: 100,
     margin: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   selectedImage: {
-    width: '100%',
-    height: '70%',
+    width: "100%",
+    height: "70%",
     marginRight: 15,
-    resizeMode: 'center',
+    resizeMode: "center",
   },
   selImageView: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E0DFDF',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#E0DFDF",
     margin: 20,
   },
   imgView: {
@@ -162,20 +184,20 @@ const styles = StyleSheet.create({
   },
   brandText: {
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   brandNmaeView: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   imagetopStyle: {
     height: 60,
-    justifyContent: 'center',
+    justifyContent: "center",
     zIndex: 1,
   },
   listImage: {
-    height: '100%',
+    height: "100%",
     width: 100,
-    backgroundColor: '#E0DFDF',
+    backgroundColor: "#E0DFDF",
     borderLeftWidth: 1,
   },
   img: {

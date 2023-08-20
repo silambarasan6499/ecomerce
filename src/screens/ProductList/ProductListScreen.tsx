@@ -21,8 +21,6 @@ const ProductListScreen = ({ navigation }: any) => {
     useLazyFetchOneQuery();
 
   useEffect(() => {
-    console.log("---", data);
-
     if (data && data.products) {
       setProductList(data.products);
     }
@@ -72,8 +70,8 @@ const ProductListScreen = ({ navigation }: any) => {
 
       <View style={styles.textView}>
         <Text style={styles.text}>ALL</Text>
-        <Text style={styles.text}>WOMEN</Text>
-        <Text style={styles.text}>KIDS</Text>
+        <Text style={styles.text}>Bakery</Text>
+        <Text style={styles.text}>Foodgrains</Text>
       </View>
       <View style={styles.productListView}>
         {productList.length > 0 && (
@@ -85,11 +83,6 @@ const ProductListScreen = ({ navigation }: any) => {
           />
         )}
       </View>
-      {/* {isLoading && (
-        <View style={[Layout.fill, Layout.colCenter]}>
-          <ActivityIndicator size={'large'} />
-        </View>
-      )} */}
     </View>
   );
 };
